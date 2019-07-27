@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/msoerjanto/Hackaday-List-App/issues"
   },
-  "homepage": "https://github.com/msoerjanto/Hackaday-List-App#readme"
+  "homepage": "https://github.com/msoerjanto/Hackaday-List-App#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "https": "^1.0.0"
+  }
 }
