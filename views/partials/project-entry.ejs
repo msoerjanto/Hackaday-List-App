@@ -1,0 +1,72 @@
+<li class="list-group-item row">
+    <div class="col-md-4">
+        <div class="row">
+            <img src="<%= project.image_url %>" height="240" width="240">
+        </div>
+        <div class="row">
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <label>Name: </label>
+                    <%= project.name %>
+                </li>
+                <li class="list-group-item">
+                    <label>Owner: </label>
+                    <%= project.owner_id %>
+                </li>
+                <li class="list-group-item">
+                    <label>URL: </label>
+                    <%= project.url %>
+                </li>
+                <li class="list-group-item">
+                    <label>Created: </label>
+                    <%= project.created %>
+                </li>
+                <li class="list-group-item">
+                    <label>Tags: </label>
+                    <% project.tags.forEach(function(tag) { %>
+                        <%= tag %>
+                    <% }); %>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <h3 style="font-weight: bold"><%= project.summary %></h3>
+        <p>
+            <%= project.description %>
+        </p>
+    </div>
+</li>
+
+<!--{-->
+<!--"id":1313,-->
+<!--"url":"https:\/\/hackaday.io\/project\/1313-openmv",-->
+<!--"owner_id":10526,-->
+<!--"name":"OpenMV",-->
+<!--"summary":"Python-powered machine vision modules",-->
+<!--"description":"The OpenMV project aims at making machine vision more accessible to beginners by developing a user-friendly, open-source, low-cost machine vision platform.\r\n\r\nOpenMV cameras are programmable in Python3 and come with an extensive set of image processing functions such as face detection, keypoints descriptors, color tracking, QR and Bar codes decoding, AprilTags, GIF and MJPEG recording and more.\r\n\r\nAdditionally, OpenMV includes a cross-platform IDE (based on Qt Creator) designed specifically to support programmable cameras. The IDE allows viewing the camera&apos;s frame buffer, accessing sensor controls, uploading scripts to the camera via serial over USB (or WiFi\/BLE if available) and includes a set of image processing tools to generate tags, thresholds, keypoints etc...\r\n\r\nThe OpenMV project is a THP semifinalist and was successfully funded via Kickstarter back in 2015 and has come a long way since then.",-->
+<!--"image_url":"https:\/\/cdn.hackaday.io\/images\/5817461406329458960.JPG",-->
+<!--"views":204720,-->
+<!--"comments":211,-->
+<!--"followers":3580,-->
+<!--"skulls":1368,-->
+<!--"logs":19,-->
+<!--"details":1,-->
+<!--"instruction":0,-->
+<!--"components":10,-->
+<!--"images":6,-->
+<!--"created":1401763612,-->
+<!--"updated":1554388653,-->
+<!--"tags":[-->
+<!--"STM32F407",-->
+<!--"camera",-->
+<!--"OpenMV",-->
+<!--"arm",-->
+<!--"TheHackadayPrize",-->
+<!--"python",-->
+<!--"stm32f7",-->
+<!--"machine vision",-->
+<!--"ongoing project",-->
+<!--"STm32f429"-->
+<!--]-->
+<!--}-->

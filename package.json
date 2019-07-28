@@ -17,7 +17,9 @@
   },
   "homepage": "https://github.com/msoerjanto/Hackaday-List-App#readme",
   "dependencies": {
+    "ejs": "^2.6.2",
     "express": "^4.17.1",
-    "https": "^1.0.0"
+    "https": "^1.0.0",
+    "nodemon": "^1.19.1"
   }
 }
