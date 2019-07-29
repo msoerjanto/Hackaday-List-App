@@ -33,7 +33,6 @@ async function getPage(page, perPage) {
         usersList.forEach(user => {
             users[user.id] = user;
         });
-        console.log(users);
         return { ...projects, users }
     } catch (e) {
         console.error(e);

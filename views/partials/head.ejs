@@ -5,7 +5,43 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 <!-- CSS (load bootstrap from a CDN) -->
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
 <style>
-    body    { padding-top:50px; }
+    body { padding-top:50px; }
 </style>
+
+<script>
+    function addListeners() {
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip({
+                animated: 'fade',
+                placement: 'right',
+                html: true
+            })
+        })
+        $('.page-button').click(function (event) {
+            var pages = "<%= last_page %>"
+
+            // get the page number from the id
+            var id = event.target.id;
+            var pageString;
+            if (id === 'first') {
+                pageString = 1;
+            } else if (id === 'last') {
+                pageString = pages;
+            } else {
+                pageString = id;
+            }
+            const targetPageNumber = parseInt(pageString, 10);
+
+            $.get( "http://localhost:8080/rest/v1/projects?page=" + targetPageNumber, function( data ) {
+                document.getElementById('project-list').innerHTML = data;
+                $("html, body").animate({ scrollTop: 0 }, "slow");
+                addListeners();
+            });
+        });
+    }
+    addListeners()
+</script>

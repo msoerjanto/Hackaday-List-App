@@ -11,7 +11,11 @@
                 </li>
                 <li class="list-group-item">
                     <label>Owner: </label>
-                    <%= users[project.owner_id].screen_name %>
+                    <span data-toggle="tooltip"
+                          title="<%- include ../partials/user-modal %>">
+                        <%= users[project.owner_id].screen_name %>
+
+                    </span>
                 </li>
                 <li class="list-group-item">
                     <label>URL: </label>
