@@ -1,7 +1,9 @@
-<div class="container">
+<div class="container" id="project-list">
     <ul class="list-group">
         <% projects.forEach(function(project) { %>
             <% include ./project-entry %>
         <% }); %>
     </ul>
+    <% include ../partials/pagination.ejs %>
 </div>
+

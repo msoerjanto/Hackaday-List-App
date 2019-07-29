@@ -1,0 +1,30 @@
+<div>
+    <%if (last_page > 0) { %>
+        <ul class="pagination text-center">
+            <% if (page == 1) { %>
+                <li class="disabled" id="first"><a>First</a></li>
+            <% } else { %>
+                <li><button class="page-button">First</button></li>
+            <% } %>
+            <% var i = (Number(page) > 5 ? Number(page) - 4 : 1) %>
+            <% if (i !== 1) { %>
+                <li class="disabled"><button>...</button></li>
+            <% } %>
+            <% for (; i <= (Number(page) + 4) && i <= last_page; i++) { %>
+                <% if (i == page) { %>
+                    <li class="active"><button><%= i %></button></li>
+                <% } else { %>
+                    <li><button class="page-button" id="<%= i %>"><%= i %></button></li>
+                <% } %>
+                <% if (i == Number(page) + 4 && i < last_page) { %>
+                    <li class="disabled"><button>...</button></li>
+                <% } %>
+            <% } %>
+            <% if (page == last_page) { %>
+                <li class="disabled"><a>Last</a></li>
+            <% } else { %>
+                <li><button class="page-button" id="last">Last</button></li>
+            <% } %>
+        </ul>
+    <% } %>
+</div>
