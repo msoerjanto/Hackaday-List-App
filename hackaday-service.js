@@ -4,25 +4,11 @@ const protocol = 'https://';
 const domain = 'api.hackaday.io/v1';
 const apiKey = '0b4gG8fRy7sDTlkk';
 
-function generateUrl(params, path) {
-    return protocol + domain + path + params;
-}
+/////////////////////////////////////////////////////////////////////////////////////////////////
+//                                      Public Methods                                         //
+/////////////////////////////////////////////////////////////////////////////////////////////////
 
-function generateParams(params) {
-    if(!params) {
-        return '';
-    }
-    let queryParam = '?';
-    params.forEach((param, index) => {
-       queryParam += `${param.key}=${param.value}`;
-       if (index < params.length - 1) {
-           queryParam += '&';
-       }
-    });
-    return queryParam;
-}
-
-async function getPage(page, perPage) {
+async function getDataForIndex(page, perPage) {
     try {
         const projects = await getProjects(page, perPage);
         const userIds = projects.projects.map(project => project.owner_id);
@@ -40,8 +26,132 @@ async function getPage(page, perPage) {
 
 }
 
-function getUser(id) {
-    const path = `/users/${id}`;
+async function getDataForProject(projectId) {
+    try {
+        const project = await getProject(projectId);
+        const user = await getUser(project.owner_id);
+
+        let recommendedProjects = [];
+        let recommendedUsers = [];
+
+        if (project.tags) {
+            const projectTags = project.tags ? project.tags : [];
+            const userTags = user.tags ? user.tags : [];
+            const tags = projectTags.concat(userTags);
+            const recommendedProjectIds = await getRecommendedByType(tags, 'projects', project.id);
+            const recommendedUserIds = await getRecommendedByType(tags, 'users', user.id);
+
+            recommendedProjects = await getByIds(recommendedProjectIds, 'projects');
+            recommendedUsers = await getByIds(recommendedUserIds, 'users');
+
+            console.log('--- recommended projects ---', recommendedProjects);
+            console.log('---recommended users---', recommendedUsers);
+        }
+
+        return { project, user, recommendedProjects, recommendedUsers };
+    } catch (e) {
+        console.error(e);
+    }
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
+//                              Helper Methods With Business Logic                             //
+/////////////////////////////////////////////////////////////////////////////////////////////////
+
+async function getRecommendedByType(tags, type, id) {
+    let result;
+    const path = type === 'projects' ? 'projects' : 'users';
+    try {
+        result = await Promise.all(
+            tags.map(tag => getBySearchTerm(tag, type))
+        );
+    } catch (e) {
+        console.error(e);
+    }
+    const parsedResult = result
+        .map((res) => res[path])
+        .reduce((res1, res2) => res1.concat(res2), [])
+        .filter(elem => !!elem && elem.id !== id);
+
+    return getRecommendedEntities(tags, parsedResult);
+}
+
+function getRecommendedEntities(tags, list) {
+    // create a list of pairs
+    const store = {};
+    let mostSimilar = {key: null, value: 0 };
+    let secondSimilar = { key: null, value: 0};
+    let thirdSimilar = { key: null, value: 0 };
+    list.forEach(entity => {
+        const tagSet = new Set(entity.tags);
+        if (store[entity.id] === undefined) {
+            store[entity.id] = 0;
+            if (entity.tags) {
+                tags.forEach(tag => {
+                    if (tagSet.has(tag)) {
+                        store[entity.id]++;
+                    }
+                });
+                if (store[entity.id] > mostSimilar.value) {
+                    mostSimilar.key = entity.id;
+                    mostSimilar.value = store[entity.id];
+                } else if (store[entity.id] > secondSimilar.value) {
+                    secondSimilar.key = entity.id;
+                    secondSimilar.value = store[entity.id];
+                } else if (store[entity.id] > thirdSimilar.value) {
+                    thirdSimilar.key = entity.id;
+                    thirdSimilar.value = store[entity.id];
+                }
+            }
+        }
+    });
+
+    // Only return the 5 most similar items
+    const result = [];
+    if (mostSimilar.key) {
+        result.push(mostSimilar.key);
+    }
+    if (secondSimilar.key) {
+        result.push(secondSimilar.key);
+    }
+    if (thirdSimilar.key) {
+        result.push(thirdSimilar.key);
+    }
+    return result;
+}
+
+function getByIds(ids, type) {
+    const path = `/${type}/batch`;
+    const params = [
+        {key: 'api_key', value: apiKey},
+        {key: 'ids', value: ids.join() }
+    ];
+    return get(path, params);
+}
+
+function getBySearchTerm(searchTerm, type) {
+    const path = `/search/${type}`;
+    const params = [
+        {key: 'api_key', value: apiKey},
+        {key: 'search_term', value: cleanSearchTerm(searchTerm) }
+    ];
+    return get(path, params)
+}
+
+function cleanSearchTerm(term) {
+    let cleanString = '';
+    for (let i = 0; i < term.length; i++) {
+        if (term.charAt(i) === ' ') {
+            cleanString += '+';
+        } else {
+            cleanString += term.charAt(i);
+        }
+    }
+    return cleanString;
+}
+
+function getProject(id) {
+    const path = `/projects/${id}`;
     const params = [{key: 'api_key', value: apiKey}];
 
     return get(path, params);
@@ -58,6 +168,17 @@ function getProjects(page, perPage) {
     }
     return get(path, params);
 }
+
+function getUser(id) {
+    const path = `/users/${id}`;
+    const params = [{key: 'api_key', value: apiKey}];
+
+    return get(path, params);
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
+//                                     HTTP Helper Methods                                     //
+/////////////////////////////////////////////////////////////////////////////////////////////////
 
 function get(path, params) {
     // return new pending promise
@@ -82,8 +203,25 @@ function get(path, params) {
     });
 }
 
+function generateUrl(params, path) {
+    return protocol + domain + path + params;
+}
+
+function generateParams(params) {
+    if(!params) {
+        return '';
+    }
+    let queryParam = '?';
+    params.forEach((param, index) => {
+        queryParam += `${param.key}=${param.value}`;
+        if (index < params.length - 1) {
+            queryParam += '&';
+        }
+    });
+    return queryParam;
+}
+
 module.exports = {
-    getProjects,
-    getUser,
-    getPage
+    getDataForProject,
+    getDataForIndex
 };

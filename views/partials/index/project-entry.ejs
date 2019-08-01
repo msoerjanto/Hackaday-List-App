@@ -1,29 +1,26 @@
 <li class="list-group-item row">
     <div class="col-md-4">
         <div class="row">
-            <img alt="Project Image Unavailable" src="<%= project.image_url %>" height="240" width="240">
+            <img alt="Project Image Unavailable" src="<%= project.image_url %>" height="220" width="220">
         </div>
+    </div>
+    <div class="col-md-8">
         <div class="row">
             <ul class="list-group">
                 <li class="list-group-item">
                     <label>Name: </label>
-                    <%= project.name %>
+                    <a href="/project/<%= project.id %>"><%= project.name %></a>
                 </li>
                 <li class="list-group-item">
                     <label>Owner: </label>
                     <span data-toggle="tooltip"
-                          title="<%- include ../partials/user-modal %>">
+                          title="<%- include ./user-modal %>">
                         <%= users[project.owner_id].screen_name %>
-
                     </span>
                 </li>
                 <li class="list-group-item">
-                    <label>URL: </label>
-                    <%= project.url %>
-                </li>
-                <li class="list-group-item">
-                    <label>Created: </label>
-                    <%= project.created %>
+                   <label>Summary: </label>
+                    <%- project.summary %>
                 </li>
                 <li class="list-group-item">
                     <label>Tags: </label>
@@ -33,11 +30,5 @@
                 </li>
             </ul>
         </div>
-    </div>
-    <div class="col-md-8">
-        <h3 style="font-weight: bold"><%- project.summary %></h3>
-        <p>
-            <%- project.description %>
-        </p>
     </div>
 </li>
