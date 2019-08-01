@@ -1,8 +1,7 @@
 const https = require('https');
 
-const protocol = 'https://';
-const domain = 'api.hackaday.io/v1';
-const apiKey = '0b4gG8fRy7sDTlkk';
+const resourceUrl = process.env.RESOURCE_URL;
+const apiKey = process.env.API_KEY;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 //                                      Public Methods                                         //
@@ -204,7 +203,7 @@ function get(path, params) {
 }
 
 function generateUrl(params, path) {
-    return protocol + domain + path + params;
+    return resourceUrl + path + params;
 }
 
 function generateParams(params) {
@@ -223,5 +222,5 @@ function generateParams(params) {
 
 module.exports = {
     getDataForProject,
-    getDataForIndex
+    getDataForIndex,
 };

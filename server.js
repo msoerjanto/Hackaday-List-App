@@ -1,3 +1,5 @@
+require('dotenv').config({ silent: true });
+
 const express = require('express');
 const app = express();
 
@@ -33,10 +35,10 @@ app.get('/rest/v1/projects', (req, response) => {
     const perPage = req.query.perPage || 10;
     const page = req.query.page || 1;
 
-    hackadayService.getPage(page, perPage)
+    hackadayService.getDataForIndex(page, perPage)
         .then((res) => {
             if(res.projects) {
-                ejs.renderFile('./views/partials/project-list.ejs', res, null, function(err, str) {
+                ejs.renderFile('./views/partials/index/project-list.ejs', res, null, function(err, str) {
                     if(err) {
                         console.error(err);
                     }

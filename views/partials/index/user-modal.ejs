@@ -1,0 +1,33 @@
+<div>
+    <div>
+        <img alt='User Image Unavailable' src='<%= users[project.owner_id].image_url %>' width='64' height='64'>
+    </div>
+    <div>
+        <ul>
+            <li>
+                <label>Name: </label>
+                <%= users[project.owner_id].screen_name %>
+            </li>
+            <li>
+                <label>Location: </label>
+                <%= users[project.owner_id].location %>
+            </li>
+            <li>
+                <label>Rank: </label>
+                <%= users[project.owner_id].rank %>
+            </li>
+            <li>
+                <label>Followers: </label>
+                <%= users[project.owner_id].followers %>
+            </li>
+            <li>
+                <label>Following: </label>
+                <%= users[project.owner_id].following %>
+            </li>
+            <li>
+                <label>Skulls: </label>
+                <%= users[project.owner_id].skulls %>
+            </li>
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,42 @@
+<div class="container">
+    <div class="col-md-4">
+        <div class="row">
+            <img alt="Project Image Unavailable" src="<%= project.image_url %>" height="240" width="240">
+        </div>
+        <div class="row">
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <label>Name: </label>
+                    <%= project.name %>
+                </li>
+                <li class="list-group-item">
+                    <label>Owner: </label>
+                    <span>
+                        <%= user.screen_name %>
+
+                    </span>
+                </li>
+                <li class="list-group-item">
+                    <label>URL: </label>
+                    <a href="<%= project.url %>"><%= project.url %></a>
+                </li>
+                <li class="list-group-item">
+                    <label>Created: </label>
+                    <%= project.created %>
+                </li>
+                <li class="list-group-item">
+                    <label>Tags: </label>
+                    <% project.tags.forEach(function(tag) { %>
+                        <%= tag %>
+                    <% }); %>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <h3 style="font-weight: bold"><%- project.summary %></h3>
+        <p>
+            <%- project.description %>
+        </p>
+    </div>
+</div>
