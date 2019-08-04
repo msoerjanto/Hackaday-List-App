@@ -1,12 +1,11 @@
-<div class="container">
-    <div class="col-md-4">
-        <div class="row">
-            <img alt="Project Image Unavailable" src="<%= project.image_url %>" height="240" width="240">
+<div class="project-body center-parent row">
+    <div class="col-md-4 center-child center-parent">
+        <div class="row center-child">
+            <img class="project-image" alt="Project Image Unavailable" src="<%= project.image_url %>" height="240" width="240">
         </div>
-        <div class="row">
+        <div class="row project-body-metadata center-child">
             <ul class="list-group">
-                <li class="list-group-item">
-                    <label>Name: </label>
+                <li class="list-group-item project-title">
                     <%= project.name %>
                 </li>
                 <li class="list-group-item">
@@ -33,9 +32,9 @@
             </ul>
         </div>
     </div>
-    <div class="col-md-8">
-        <h3 style="font-weight: bold"><%- project.summary %></h3>
-        <p>
+    <div class="col-md-8 center-child project-body-description">
+        <h3 class="project-summary"><%- project.summary %></h3>
+        <p class="project-description">
             <%- project.description %>
         </p>
     </div>

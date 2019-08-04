@@ -42,9 +42,6 @@ async function getDataForProject(projectId) {
 
             recommendedProjects = await getByIds(recommendedProjectIds, 'projects');
             recommendedUsers = await getByIds(recommendedUserIds, 'users');
-
-            console.log('--- recommended projects ---', recommendedProjects);
-            console.log('---recommended users---', recommendedUsers);
         }
 
         return { project, user, recommendedProjects, recommendedUsers };

@@ -6,6 +6,7 @@ const app = express();
 const ejs = require('ejs');
 
 const sampleProjectsData = require('./sample');
+const sampleProjectData = require('./sample-project');
 
 const hackadayService = require('./hackaday-service');
 
@@ -15,15 +16,16 @@ app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
-    res.render('pages/index', sampleProjectsData);
-    // const perPage = 10;
-    // const page = 1;
-    // hackadayService.getDataForIndex(page, perPage).then(data => {
-    //     res.render('pages/index', data)
-    // }).catch(err => console.error(err));
+    // res.render('pages/index', sampleProjectsData);
+    const perPage = 10;
+    const page = 1;
+    hackadayService.getDataForIndex(page, perPage).then(data => {
+        res.render('pages/index', data)
+    }).catch(err => console.error(err));
 });
 
 app.get('/project/:projectId', (req, res) => {
+    // res.render('pages/project', sampleProjectData)
     const projectId = req.params.projectId;
     if (projectId) {
         hackadayService.getDataForProject(projectId).then((data) => {

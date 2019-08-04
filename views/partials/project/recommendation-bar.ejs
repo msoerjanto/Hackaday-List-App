@@ -1,20 +1,25 @@
-<div class="container">
-    <h3>Recommended Projects</h3>
-    <div class="row">
-        <% recommendedProjects.projects.forEach(function(project) { %>
-            <div class="col-sm-4">
-                <img alt="Project Image Unavailable" src="<%= project.image_url %>" height="120" width="120">
-                <h6><%= project.name %></h6>
-            </div>
-        <% }); %>
+<div class="row">
+    <div class="recommendation-bar center-parent">
+        <h3 class="recommendation-bar-title">Recommended Projects</h3>
+        <div class="row">
+            <% recommendedProjects.projects.forEach(function(project) { %>
+                <div class="col-sm-4 center-child">
+                    <img alt="Project Image Unavailable" src="<%= project.image_url %>" height="120" width="120">
+                    <h6><%= project.name %></h6>
+                </div>
+            <% }); %>
+        </div>
     </div>
-    <h3>Recommended Users</h3>
-    <div>
-        <% recommendedUsers.users.forEach(function(user) { %>
-            <div class="col-sm-4">
-                <img alt="User Image Unavailable" src="<%= user.image_url %>" height="120" width="120">
-                <h6><%= user.screen_name %></h6>
-            </div>
-        <% }); %>
+
+    <div class="recommendation-bar center-parent">
+        <h3 class="recommendation-bar-title">Recommended Users</h3>
+        <div class="row">
+            <% recommendedUsers.users.forEach(function(user) { %>
+                <div class="col-sm-4 center-child">
+                    <img alt="User Image Unavailable" src="<%= user.image_url %>" height="120" width="120">
+                    <h6><%= user.screen_name %></h6>
+                </div>
+            <% }); %>
+        </div>
     </div>
 </div>

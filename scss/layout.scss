@@ -1,0 +1,81 @@
+body {
+  max-width: 800px;
+}
+
+.center-parent {
+  text-align: center;
+}
+
+.center-child {
+  display: inline-block;
+}
+
+.project-entry-label {
+  float: left; width: 10em;
+}
+
+.project-entry {
+  margin-top: 16px;
+  margin-bottom: 16px;
+  border-radius: 5px;
+  padding: 20px;
+};
+
+.project-body {
+  border-radius: 5px;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  padding: 32px;
+  max-width: 960px;
+  min-width: 800px;
+}
+
+.project-body-description {
+  padding: 32px;
+  height: 50%;
+  margin: auto;
+}
+
+.project-body-description h3 {
+  padding: 16px;
+}
+
+.project-body-metadata {
+  max-width: 300px;
+}
+
+.project-image {
+  margin: 16px;
+}
+
+.project-summary {
+  margin: 32px;
+  border-radius: 16px;
+}
+
+.project-description {
+  border-radius: 16px;
+  padding: 16px;
+}
+
+.recommendation-bar {
+  border-radius: 5px;
+  margin: 16px;
+}
+
+.recommendation-bar-title {
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.footer {
+  border-radius: 5px;
+  padding: 16px;
+  margin: 16px;
+}
+
+@media (min-width: 800px) {
+  .container{
+    max-width: 960px;
+  }
+}
