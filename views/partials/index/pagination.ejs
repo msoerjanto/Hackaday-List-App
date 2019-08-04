@@ -4,26 +4,26 @@
             <% if (page == 1) { %>
                 <li class="disabled" id="first"><a>First</a></li>
             <% } else { %>
-                <li><button class="page-button btn btn-default">First</button></li>
+                <li><a class="page-button btn btn-default">First</a></li>
             <% } %>
             <% var i = (Number(page) > 5 ? Number(page) - 4 : 1) %>
             <% if (i !== 1) { %>
-                <li class="disabled"><button>...</button></li>
+                <li class="disabled"><a>...</a></li>
             <% } %>
             <% for (; i <= (Number(page) + 4) && i <= last_page; i++) { %>
                 <% if (i == page) { %>
-                    <li class="active"><button><%= i %></button></li>
+                    <li class="active"><a><%= i %></a></li>
                 <% } else { %>
-                    <li><button class="page-button btn btn-default" id="<%= i %>"><%= i %></button></li>
+                    <li><a class="page-button btn btn-default" id="<%= i %>"><%= i %></a></li>
                 <% } %>
                 <% if (i == Number(page) + 4 && i < last_page) { %>
-                    <li class="disabled"><button>...</button></li>
+                    <li class="disabled"><a>...</a></li>
                 <% } %>
             <% } %>
             <% if (page == last_page) { %>
                 <li class="disabled"><a>Last</a></li>
             <% } else { %>
-                <li><button class="page-button btn btn-default" id="last">Last</button></li>
+                <li><a class="page-button btn btn-default" id="last">Last</a></li>
             <% } %>
         </ul>
     <% } %>
