@@ -1,28 +1,27 @@
-<li class="list-group-item row">
-    <div class="col-md-4">
+<li class="list-group-item row project-entry center-parent">
+    <div class="col-md-4 center-child">
         <div class="row">
-            <img alt="Project Image Unavailable" src="<%= project.image_url %>" height="220" width="220">
+            <img class="project-entry-img" alt="Project Image Unavailable" src="<%= project.image_url %>" height="220" width="220">
         </div>
     </div>
-    <div class="col-md-8">
+    <div class="col-md-8 center-child">
         <div class="row">
             <ul class="list-group">
-                <li class="list-group-item">
-                    <label>Name: </label>
+                <li class="list-group-item project-entry-title">
                     <a href="/project/<%= project.id %>"><%= project.name %></a>
                 </li>
-                <li class="list-group-item">
+                <li class="list-group-item project-entry-field">
                     <label>Owner: </label>
                     <span data-toggle="tooltip"
                           title="<%- include ./user-modal %>">
                         <%= users[project.owner_id].screen_name %>
                     </span>
                 </li>
-                <li class="list-group-item">
+                <li class="list-group-item project-entry-field">
                    <label>Summary: </label>
                     <%- project.summary %>
                 </li>
-                <li class="list-group-item">
+                <li class="list-group-item project-entry-field">
                     <label>Tags: </label>
                     <% project.tags.forEach(function(tag) { %>
                         <%= tag %>
