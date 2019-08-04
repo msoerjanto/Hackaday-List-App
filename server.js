@@ -5,8 +5,8 @@ const app = express();
 
 const ejs = require('ejs');
 
-const sampleProjectsData = require('./sample');
-const sampleProjectData = require('./sample-project');
+// const sampleProjectsData = require('./sample');
+// const sampleProjectData = require('./sample-project');
 
 const hackadayService = require('./hackaday-service');
 
