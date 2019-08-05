@@ -1,10 +1,10 @@
-<div class="center-child">
+<div id="pagination" class="center-child">
     <%if (last_page > 0) { %>
         <ul class="pagination text-center">
             <% if (page == 1) { %>
-                <li class="disabled" id="first"><a>First</a></li>
+                <li class="disabled" id="page-1"><a>First</a></li>
             <% } else { %>
-                <li><a class="page-button btn btn-default">First</a></li>
+                <li><a class="page-button btn btn-default" id="page-1">First</a></li>
             <% } %>
             <% var i = (Number(page) > 5 ? Number(page) - 4 : 1) %>
             <% if (i !== 1) { %>
@@ -12,9 +12,9 @@
             <% } %>
             <% for (; i <= (Number(page) + 4) && i <= last_page; i++) { %>
                 <% if (i == page) { %>
-                    <li class="active"><a><%= i %></a></li>
+                    <li class="active"><a id="current"><%= i %></a></li>
                 <% } else { %>
-                    <li><a class="page-button btn btn-default" id="<%= i %>"><%= i %></a></li>
+                    <li><a class="page-button btn btn-default" id="page-<%= i %>"><%= i %></a></li>
                 <% } %>
                 <% if (i == Number(page) + 4 && i < last_page) { %>
                     <li class="disabled"><a>...</a></li>
@@ -23,7 +23,7 @@
             <% if (page == last_page) { %>
                 <li class="disabled"><a>Last</a></li>
             <% } else { %>
-                <li><a class="page-button btn btn-default" id="last">Last</a></li>
+                <li><a class="page-button btn btn-default" id="page-<%= i %>">Last</a></li>
             <% } %>
         </ul>
     <% } %>
